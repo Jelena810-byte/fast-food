@@ -1,0 +1,15 @@
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/"><h2>Fast Food</h2></a>
+  </div>
+
+  <div class="nav-right">
+    <% if (!user) { %>
+      <a href="/auth/sign-in"><button class="nav-btn sign-in-btn">Sign In</button></a>
+      <a href="/auth/sign-up"><button class="nav-btn sign-up-btn">Sign Up</button></a>
+    <% } else { %>
+      <span class="welcome-msg">Welcome, <%= user.username %>!</span>
+      <a href="/auth/sign-out"><button class="nav-btn sign-out-btn">Sign Out</button></a>
+    <% } %>
+  </div>
+</nav>

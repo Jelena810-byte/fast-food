@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= user.username %>’s Dashboard</title>
+  <link rel="stylesheet" href="/stylesheet/style.css">
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <main class="dashboard">
+    <h1>Welcome, <%= user.username %>!</h1>
+
+    <section class="user-actions">
+      <a href="/users/<%= user._id %>/menu">🍔 View Your Menu</a>
+      <a href="/users/<%= user._id %>/menu/new">➕ Add a New Dish</a>
+      <a href="/auth/sign-out" class="logout-btn">🚪 Sign Out</a>
+    </section>
+
+    <section class="user-info">
+      <h2>Your Info</h2>
+      <ul>
+        <li><strong>Username:</strong> <%= user.username %></li>
+        <li><strong>User ID:</strong> <%= user._id %></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

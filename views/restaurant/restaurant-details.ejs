@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/stylesheet/style.css" />
+  <title>Restaurant Details</title>
+</head>
+<body>
+
+  <%- include('./partials/_navbar.ejs') %>
+
+  <h1>Restaurant Details</h1>
+  <p><strong>Name:</strong> <%= restaurant.name %></p>
+  <p><strong>Location:</strong> <%= restaurant.location %></p>
+  <p><strong>Phone:</strong> <%= restaurant.phone %></p>
+
+</body>
+</html>

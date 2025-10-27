@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheet/style.css">
+  <title>Fast Food Home</title>
+</head>
+<body>
+  <div class="navbar">
+    <% if (!user) { %>
+      <a href="/auth/sign-in"><button class="btn-orange">Sign In</button></a>
+      <a href="/auth/sign-up"><button class="btn-orange">Sign Up</button></a>
+    <% } else { %>
+      <span>Welcome, <%= user.username %>!</span>
+      <a href="/auth/sign-out"><button class="btn-orange">Sign Out</button></a>
+    <% } %>
+  </div>
+
+  <div class="main-content">
+    <h1>Welcome to Fast Food Restaurant</h1>
+    <p>A place to see and choose a perfect meal!</p>
+
+    <% if (user) { %>
+      <a href="/users/<%= user._id %>/menu">
+        <button class="btn-red center-btn">Menu</button>
+      </a>
+      <a href="/restaurant-details">
+        <button class="btn-red center-btn">Restaurant Details</button>
+      </a>
+    <% } else { %>
+      <a href="/auth/sign-in"><button class="btn-orange center-btn">Sign in to see Menu</button></a>
+    <% } %>
+  </div>
+</body>
+</html>

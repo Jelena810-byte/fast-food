@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/stylesheet/style.css" />
+  <title><%= foodItem.name %> Details</title>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <div class="dish-details">
+    <h1><%= foodItem.name %></h1>
+
+    <% if (foodItem.photoUrl) { %>
+      <img src="<%= foodItem.photoUrl %>" alt="<%= foodItem.name %>" class="dish-photo-large" />
+    <% } %>
+
+    <p><strong>Description:</strong> <%= foodItem.description %></p>
+    <p><strong>Portion:</strong> <%= foodItem.portion %></p>
+    <p><strong>Price:</strong> $<%= foodItem.price.toFixed(2) %></p>
+
+    <a href="/users/<%= user._id %>/menu">
+      <button class="back-btn">Back to Menu</button>
+    </a>
+  </div>
+</body>
+</html>
