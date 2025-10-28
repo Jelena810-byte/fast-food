@@ -20,10 +20,6 @@ const userSchema = new mongoose.Schema({
    foodMenu: [menuSchema]
   }, { timestamps: true });
 
-   
-
-
-  
 
 const User = mongoose.model('User', userSchema);
 

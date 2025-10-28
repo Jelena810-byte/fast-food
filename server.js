@@ -63,18 +63,15 @@ app.get('/vip-lounge', (req, res) => {
 
 
 
-
 app.use('/auth', authController);
 
 app.use(isSignedIn); 
 
-app.use('/users', usersController);
-app.use('/users/:userId/menu', menuController);
-
+app.use('/users', isSignedIn, usersController);
+app.use('/users/:userId/menu', isSignedIn, menuController);
+//app.use('/menu', menuController);
 
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
 });
-
-

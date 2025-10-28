@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheet/style.css">
+  <title>Menu</title>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+
+  <h1>Our Menu</h1>
+
+     <div class="menu-list">
+    <% if (menu && menu.length > 0) { %>
+      <% menu.forEach(item => { %>
+        <div class="menu-card">
+          <% if (item.photo) { %>
+            <img src="<%= item.photo %>" alt="<%= item.name %>" class="menu-img" />
+          <% } %>
+          <h2><%= item.name %></h2>
+          <p><strong>Price:</strong> $<%= item.price %></p>
+          <p><strong>Portion:</strong> <%= item.portion %></p>
+          <p><%= item.description %></p>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>No dishes available yet.</p>
+    <% } %>
+  </div>
+
+  <% if (user && user.role === 'admin') { %>
+    <div class="add-button">
+      <a href="/users/<%= userId %>/menu/new"><button>+Add Dish</button></a>
+    </div>
+  <% } %>
+</body>
+</html>

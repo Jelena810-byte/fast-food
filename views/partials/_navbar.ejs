@@ -9,6 +9,9 @@
       <a href="/auth/sign-up"><button class="nav-btn sign-up-btn">Sign Up</button></a>
     <% } else { %>
       <span class="welcome-msg">Welcome, <%= user.username %>!</span>
+      <a href="/users/<%= user._id %>/menu">
+        <button class="nav-btn view-menu-btn">View Your Menu</button>
+      </a>
       <a href="/auth/sign-out"><button class="nav-btn sign-out-btn">Sign Out</button></a>
     <% } %>
   </div>

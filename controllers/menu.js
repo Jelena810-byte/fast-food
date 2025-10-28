@@ -1,22 +1,40 @@
 const express = require('express');
 const router = express.Router();
 
-const Menu = require('../models/menu.js');
+//const Menu = require('../models/user.js');
 const User = require('../models/user.js');
 
 
-//router.get('/', async (req, res) => {
-  //try {
-    //const menuItems = await Menu.find();
-    //res.render('menu/index.ejs', {
-      //menuItems,
-      //user: req.session.user
-    //});
-  //} catch (err) {
-    //console.error('Error loading menu:', err);
-    //res.redirect('/');
-  //}
-//});
+router.get('/:userId/menu', async (req, res) => {
+  try {
+    console.log('user menu: hit route path');
+    const selectedUser = await User.findById(req.params.userId);
+    console.log('jfjalfjaljakfdfslfj')
+    if (!selectedUser) throw new Error('User not found');
+
+    const menu = selectedUser.foodMenu; // Array of dishes
+
+    // Pass both user info and menu to the view
+    res.render('/')
+    // res.render('menu/index.ejs', { menu, user: selectedUser });
+  } catch (err) {
+    console.error('Error fetching user menu:', err);
+    res.redirect('/');
+  }
+});
+
+router.get('/', async (req, res) => {
+  try {
+    const menuItems = await Menu.find();
+    res.render('menu/index.ejs', {
+      foodItem: menuItems,
+      user: req.session.user
+    });
+  } catch (err) {
+    console.error('Error loading menu:', err);
+    res.redirect('/');
+  }
+});
 
 //router.get('/', async (req, res) => {
   //try {
@@ -76,6 +94,7 @@ const user = await User.findById(currentUser._id);
 
 router.get('/:id', async (req, res) => {
   try {
+    const user = await User.findById(req.params.userId);
     const foodItem = await Menu.findById(req.params.id);
     if (!foodItem) return res.send('Dish not found.');
 
@@ -126,12 +145,13 @@ router.put('/:itemId', async (req, res) => {
     const user = await User.findById(currentUser._id);
     const foodItem = user.foodMenu.id(req.params.itemId);
 
-    if (!foodItem) throw new Error('Dish not found');
+    //if (!foodItem) throw new Error('Dish not found');
 
-    foodItem.set(req.body);
-    await user.save();
+    //foodItem.set(req.body);
+    //await user.save();
 
-    res.redirect(`/users/${currentUser._id}/menu`);
+    //res.redirect(`/users/${currentUser._id}/menu`);
+    res.redirect(`/users/${req.params.userId}/menu`);
   } catch (err) {
     console.error(err);
     res.redirect(`/users/${req.session.user._id}/menu`);
@@ -152,7 +172,8 @@ router.delete('/:itemId', async (req, res) => {
     );
     await user.save();
 
-    res.redirect(`/users/${currentUser._id}/menu`);
+    //res.redirect(`/users/${currentUser._id}/menu`);
+     res.redirect(`/users/${req.params.userId}/menu`);
   } catch (err) {
     console.error(err);
     res.redirect(`/users/${req.session.user._id}/menu`);

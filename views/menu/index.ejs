@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/stylesheet/style.css">
-  <title>Menu</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= user.username %>’s Menu</title>
+  <link rel="stylesheet" href="/stylesheet/style.css" />
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
 
-  <h1>Our Menu</h1>
+  <main class="menu-page">
+    <header class="menu-header">
+      <h1><%= user.username %>’s Food Menu 🍔</h1>
+    </header>
 
-  <div class="menu-list">
-    <% if (foodItem && foodItem.length > 0) { %>
-      <% foodItem.forEach(item => { %>
-        <div class="menu-card">
-          <% if (item.photo) { %>
-            <img src="<%= item.photo %>" alt="<%= item.name %>" class="menu-img" />
-          <% } %>
-          <h2><%= item.name %></h2>
-          <p><strong>Price:</strong> $<%= item.price %></p>
-          <p><strong>Portion:</strong> <%= item.portion %></p>
-          <p><%= item.description %></p>
-        </div>
-      <% }) %>
+    <% if (menu && menu.length > 0) { %>
+      <section class="menu-items">
+        <% menu.forEach(item => { %>
+          <div class="menu-card">
+            <% if (item.image) { %>
+              <img src="<%= item.image %>" alt="<%= item.name %>" class="menu-image" />
+            <% } %>
+            <div class="menu-info">
+              <h2><%= item.name %></h2>
+              <p class="menu-description"><%= item.description || 'No description available.' %></p>
+              <p class="menu-price">$<%= item.price ? item.price.toFixed(2) : 'N/A' %></p>
+            </div>
+          </div>
+        <% }) %>
+      </section>
     <% } else { %>
-      <p>No dishes available yet.</p>
+      <section class="empty-menu">
+        <p>No dishes have been added yet.</p>
+        <a href="/users/<%= user._id %>/menu/new" class="add-dish-btn">➕ Add a New Dish</a>
+      </section>
     <% } %>
-  </div>
-
-  <% if (user && user.role === 'admin') { %>
-    <div class="add-button">
-      <a href="/users/<%= userId %>/menu/new"><button>Add Dish</button></a>
-    </div>
-  <% } %>
+  </main>
 </body>
 </html>
