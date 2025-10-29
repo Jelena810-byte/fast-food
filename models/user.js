@@ -11,15 +11,13 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
 
-
   role: {
     type: String,
     enum: ['admin', 'customer'],
-    default: 'customer'
+    default: 'admin'
   },
    foodMenu: [menuSchema]
   }, { timestamps: true });
-
 
 const User = mongoose.model('User', userSchema);
 

@@ -14,7 +14,9 @@
 
     <section class="user-actions">
       <a href="/users/<%= user._id %>/menu">🍔 View Your Menu</a>
-      <a href="/users/<%= user._id %>/menu/new">➕ Add a New Dish</a>
+      <% if (user.role === 'admin') { %>
+        <a href="/users/<%= user._id %>/menu/new">➕ Add a New Dish</a>
+      <% } %>
       <a href="/auth/sign-out" class="logout-btn">🚪 Sign Out</a>
     </section>
 

@@ -1,2 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Users</title>
+  <link rel="stylesheet" href="/stylesheet/style.css">
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
 
+  <main>
+    <h1>All Users</h1>
 
+    <% if (users && users.length > 0) { %>
+      <ul class="users-list">
+        <% users.forEach(userItem => { %>
+          <li>
+            <strong><%= userItem.username %></strong> (Role: <%= userItem.role %>)
+            <a href="/users/<%= userItem._id %>/menu">View Menu</a>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No users found.</p>
+    <% } %>
+  </main>
+</body>
+</html>

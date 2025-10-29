@@ -2,37 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Dish</title>
   <link rel="stylesheet" href="/stylesheet/style.css">
-  <title>Menu</title>
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
 
-  <h1>Our Menu</h1>
+  <main class="form-container">
+    <h1>Edit Dish</h1>
 
-     <div class="menu-list">
-    <% if (menu && menu.length > 0) { %>
-      <% menu.forEach(item => { %>
-        <div class="menu-card">
-          <% if (item.photo) { %>
-            <img src="<%= item.photo %>" alt="<%= item.name %>" class="menu-img" />
-          <% } %>
-          <h2><%= item.name %></h2>
-          <p><strong>Price:</strong> $<%= item.price %></p>
-          <p><strong>Portion:</strong> <%= item.portion %></p>
-          <p><%= item.description %></p>
-        </div>
-      <% }) %>
-    <% } else { %>
-      <p>No dishes available yet.</p>
-    <% } %>
-  </div>
+    <form action="/users/<%= userId %>/menu/<%= menuItem._id %>?_method=PUT" method="POST">
+      <label for="name">Dish Name:</label>
+      <input type="text" name="name" value="<%= menuItem.name %>" required>
 
-  <% if (user && user.role === 'admin') { %>
-    <div class="add-button">
-      <a href="/users/<%= userId %>/menu/new"><button>+Add Dish</button></a>
-    </div>
-  <% } %>
+      <label for="price">Price ($):</label>
+      <input type="number" name="price" step="0.01" value="<%= menuItem.price %>" required>
+
+      <label for="photo">Photo URL:</label>
+      <input type="text" name="photo" value="<%= menuItem.photo %>">
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </main>
 </body>
 </html>

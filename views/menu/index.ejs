@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><%= user.username %>’s Menu</title>
-  <link rel="stylesheet" href="/stylesheet/style.css" />
+  <meta charset="UTF-8">
+  <title><%= selectedUser.username %>’s Menu</title>
+  <link rel="stylesheet" href="/stylesheet/style.css">
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
+  <a href="/users/<%= selectedUser._id %>/menu">
+</a>
 
   <main class="menu-page">
-    <header class="menu-header">
-      <h1><%= user.username %>’s Food Menu 🍔</h1>
-    </header>
+    <h1><%= selectedUser.username %>’s Menu</h1>
 
     <% if (menu && menu.length > 0) { %>
-      <section class="menu-items">
+      <div class="menu-list">
         <% menu.forEach(item => { %>
           <div class="menu-card">
-            <% if (item.image) { %>
-              <img src="<%= item.image %>" alt="<%= item.name %>" class="menu-image" />
+            <h3><%= item.name %></h3>
+            <p>Price: $<%= item.price %></p>
+            <% if (item.photo) { %>
+              <img src="<%= item.photo %>" alt="<%= item.name %>">
             <% } %>
-            <div class="menu-info">
-              <h2><%= item.name %></h2>
-              <p class="menu-description"><%= item.description || 'No description available.' %></p>
-              <p class="menu-price">$<%= item.price ? item.price.toFixed(2) : 'N/A' %></p>
-            </div>
+
+            <% if (user && user.role === 'admin') { %>
+              <div class="menu-actions">
+                <a href="/users/<%= selectedUser._id %>/menu/<%= item._id %>/edit">✏️ Edit</a>
+                <form
+                  action="/users/<%= selectedUser._id %>/menu/<%= item._id %>?_method=DELETE"
+                  method="POST"
+                  style="display:inline;">
+            <% } %>
+          <% }) %>
           </div>
-        <% }) %>
-      </section>
-    <% } else { %>
-      <section class="empty-menu">
-        <p>No dishes have been added yet.</p>
-        <a href="/users/<%= user._id %>/menu/new" class="add-dish-btn">➕ Add a New Dish</a>
-      </section>
-    <% } %>
-  </main>
-</body>
-</html>
+      <% } else { %>
+        <p>No dishes available yet.</p>
+       <% } %>
+       <a href="/users/<%= user._id %>/menu/new">
+        <button class="btn-red center-btn">Add Dish</button>
+      </a>
+      </div>
+  </body>

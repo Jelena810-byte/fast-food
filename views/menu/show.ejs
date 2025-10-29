@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/stylesheet/style.css" />
-  <title><%= foodItem.name %> Details</title>
+  <meta charset="UTF-8">
+  <title><%= menuItem.name %> Details</title>
+  <link rel="stylesheet" href="/stylesheet/style.css">
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
 
-  <div class="dish-details">
-    <h1><%= foodItem.name %></h1>
+  <main class="menu-details">
+    <h1><%= menuItem.name %></h1>
 
-    <% if (foodItem.photoUrl) { %>
-      <img src="<%= foodItem.photoUrl %>" alt="<%= foodItem.name %>" class="dish-photo-large" />
+    <% if (menuItem.photo) { %>
+      <img src="<%= menuItem.photo %>" alt="<%= menuItem.name %>">
     <% } %>
 
-    <p><strong>Description:</strong> <%= foodItem.description %></p>
-    <p><strong>Portion:</strong> <%= foodItem.portion %></p>
-    <p><strong>Price:</strong> $<%= foodItem.price.toFixed(2) %></p>
+    <p><strong>Price:</strong> $<%= menuItem.price %></p>
 
-    <a href="/users/<%= user._id %>/menu">
-      <button class="back-btn">Back to Menu</button>
-    </a>
-  </div>
+    <% if (user && user.role === 'admin') { %>
+      <a href="/users/<%= selectedUser._id %>/menu/<%= menuItem._id %>/edit">✏️ Edit</a>
+      <form action="/users/<%= selectedUser._id %>/menu/<%= menuItem._id %>?_method=DELETE" method="POST">
+        <button type="submit">🗑 Delete</button>
+      </form>
+    <% } %>
+
+    <a href="/users/<%= selectedUser._id %>/menu">← Back to Menu</a>
+  </main>
 </body>
 </html>
+
