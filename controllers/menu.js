@@ -27,12 +27,16 @@ router.get('/', async (req, res) => {
 
 router.get('/new', (req, res) => {
   const currentUser = req.session.user;
-//   if (!currentUser || currentUser.role !== 'admin') {
-//   console.log('user role', currentUser)
-//  return res.send('Only admin can add a dish.');
-//   };
+  if (!currentUser || currentUser.role !== 'admin') {
+  console.log('user role', currentUser)
+ return res.send('Only admin can add a dish.');
+  };
   res.render('menu/new.ejs', { user: currentUser })
 });
+
+// router.post('/new', (req, res) => {
+//   console.log('get dish post route')
+// })
 
 router.post('/', async (req, res) => {
   try {

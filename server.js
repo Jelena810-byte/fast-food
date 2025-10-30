@@ -8,11 +8,15 @@ const morgan = require('morgan');
 const session = require('express-session');
 const path = require('path')
 
+//const Restaurant = require('./models/restaurant.js');
+
+
 
 const usersController = require('./controllers/users.js');
 
 const authController = require('./controllers/auth.js');
 const menuController = require('./controllers/menu.js');
+
 
 const isSignedIn = require('./middleware/is-signed-in.js');
 const passUserToView = require('./middleware/pass-user-to-view.js');
@@ -53,6 +57,21 @@ app.get('/', (req, res) => {
   });
 });
 
+//app.get('/restaurant-details', async (req, res) => {
+
+  //try {
+    //const restaurant = await Restaurant.findOne();
+    //if (!restaurant) return res.send('No restaurant found.');
+    //res.render('restaurant-details.ejs', { restaurant });
+  //} catch (err) {
+    //console.error(err);
+    //res.status(500).send('Error retrieving restaurant details.');
+  //}
+//});
+
+
+
+
 app.get('/vip-lounge', (req, res) => {
   if (req.session.user) {
     res.send(`Welcome to the main menu ${req.session.user.username}.`);
@@ -69,7 +88,7 @@ app.use(isSignedIn);
 
 app.use('/users', isSignedIn, usersController);
 app.use('/users/:userId/menu', isSignedIn, menuController);
-//app.use('/menu', menuController);
+app.use('/restaurant', usersController);
 
 
 app.listen(port, () => {

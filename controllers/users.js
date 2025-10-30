@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user.js');
+const Restaurant = require('../models/restaurant.js'); 
 
 
 router.get('/', async (req, res) => {
@@ -14,6 +15,29 @@ router.get('/', async (req, res) => {
     res.redirect('/');
   }
 });
+
+router.get('/details', async (req, res) => {
+  try {
+    console.log('restaurant found:', Restaurant);
+    const userId = req.params.userId;
+
+    
+    const restaurant = await Restaurant.findOne({ owner: userId });
+
+    if (!restaurant) {
+      
+      return res.send('No restaurant details found for this user.');
+    }
+
+  
+    res.render('restaurant/restaurant-details.ejs', { restaurant });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error retrieving restaurant details.');
+  }
+});
+
 
 router.get('/:userId', async (req, res) => {
   try {
@@ -32,10 +56,6 @@ router.get('/:userId', async (req, res) => {
 
 
 
-
-
-
-
 router.get('/:userId/menu', async (req, res) => {
   try {
     const selectedUser = await User.findById(req.params.userId);
@@ -51,6 +71,11 @@ router.get('/:userId/menu', async (req, res) => {
     res.redirect('/users');
   }
 });
+
+
+
+//console.log('userId:', UserId);
+
 
 
 
