@@ -15,21 +15,13 @@
 
     <% if (menu && menu.length > 0) { %>
       <div class="menu-list">
+        <a href="/users/<%= user._id %>/menu/dish/<%= menu._id %>"
         <% menu.forEach(item => { %>
           <div class="menu-card">
             <h3><%= item.name %></h3>
             <p>Price: $<%= item.price %></p>
             <% if (item.photo) { %>
               <img src="<%= item.photo %>" alt="<%= item.name %>">
-            <% } %>
-
-            <% if (user && user.role === 'admin') { %>
-              <div class="menu-actions">
-                <a href="/users/<%= selectedUser._id %>/menu/<%= item._id %>/edit">✏️ Edit</a>
-                <form
-                  action="/users/<%= selectedUser._id %>/menu/<%= item._id %>?_method=DELETE"
-                  method="POST"
-                  style="display:inline;">
             <% } %>
           <% }) %>
           </div>

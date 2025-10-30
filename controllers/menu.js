@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
     res.render('menu/index.ejs', { 
       menu: selectedUser.foodMenu || [],
       user: req.session.user,
-      sectedUser,
+      selectedUser,
     });
   } catch (err) {
     console.error(err);
@@ -25,13 +25,24 @@ router.get('/', async (req, res) => {
 
 
 
-router.get('/new', (req, res) => {
-  const currentUser = req.session.user;
+router.get('/new', async (req, res) => {
+  const currentUser = await req.session.user;
+  //console.log('user role', currentUser)
   if (!currentUser || currentUser.role !== 'admin') {
-  console.log('user role', currentUser)
+  
  return res.send('Only admin can add a dish.');
   };
   res.render('menu/new.ejs', { user: currentUser })
+});
+
+router.get('dish/:dishId', async (req, res) => {
+  const currentUser = req.session.user;
+  const foundDish = await Menu.findById(req.params.menuId)
+  console.log('dish found', foundDish)
+  if (!currentUser || currentUser.role !== 'admin') {
+ return res.send('Only admin can add a dish.');
+  };
+  res.render('menu/show.ejs', { user: currentUser, menu: foundDish })
 });
 
 // router.post('/new', (req, res) => {
@@ -87,7 +98,7 @@ router.get('/:menuId/edit', async (req, res) => {
 router.get('/:menuId', async (req, res) => {
   try {
     const selectedUser = await User.findById(req.params.userId);
-    console.log(selectedUser)
+    //console.log(selectedUser)
     const menuItem = selectedUser.foodMenu.id(req.params.menuId);
 
     if (!menuItem) throw new Error('Menu item not found');
