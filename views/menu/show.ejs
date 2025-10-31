@@ -2,29 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title><%= menuItem.name %> Details</title>
+  <title><%= menu.name %> Details</title>
   <link rel="stylesheet" href="/stylesheet/style.css">
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
 
   <main class="menu-details">
-    <h1><%= menuItem.name %></h1>
+    <h1><%= menu.name %></h1>
 
-    <% if (menuItem.photo) { %>
-      <img src="<%= menuItem.photo %>" alt="<%= menuItem.name %>">
+    <% if (menu.photo) { %>
+      <img src="<%= menu.photo %>" alt="<%= menu.name %>">
     <% } %>
 
-    <p><strong>Price:</strong> $<%= menuItem.price %></p>
+    <p><strong>Price:</strong> $<%= menu.price %></p>
 
     <% if (user && user.role === 'admin') { %>
-      <a href="/users/<%= selectedUser._id %>/menu/<%= menuItem._id %>/edit">✏️ Edit</a>
-      <form action="/users/<%= selectedUser._id %>/menu/<%= menuItem._id %>?_method=DELETE" method="POST">
+      <a href="/users/<%= user._id %>/menu/<%= menu._id %>/edit">✏️ Edit</a>
+      <form action="/users/<%= user._id %>/menu/<%= menu._id %>?_method=DELETE" method="POST">
         <button type="submit">🗑 Delete</button>
       </form>
     <% } %>
 
-    <a href="/users/<%= selectedUser._id %>/menu">← Back to Menu</a>
+    <a href="/users/<%= user._id %>/menu">← Back to Menu</a>
   </main>
 </body>
 </html>

@@ -15,8 +15,8 @@
 
     <% if (menu && menu.length > 0) { %>
       <div class="menu-list">
-        <a href="/users/<%= user._id %>/menu/dish/<%= menu._id %>"
         <% menu.forEach(item => { %>
+          <a href="/users/<%= user._id %>/menu/dish/<%= item._id %>"
           <div class="menu-card">
             <h3><%= item.name %></h3>
             <p>Price: $<%= item.price %></p>
