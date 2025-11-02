@@ -1,4 +1,4 @@
-/* === General Page Styles === */
+
 body {
   font-family: 'Arial', sans-serif;
   background-color: #fff8f0;
@@ -13,11 +13,12 @@ main.container {
   padding: 20px;
 }
 
-/* === Headers === */
+
 h1 {
   text-align: center;
-  color: #d35400;
-  margin-bottom: 15px;
+  font-size: 2.5rem;
+  color: whitesmoke;
+  margin-bottom: 20px;
 }
 
 h2 {
@@ -27,8 +28,10 @@ h2 {
   padding-bottom: 5px;
 }
 
-/* === Restaurant Info === */
+
 p {
-  font-size: 1.1rem;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.5rem;
   margin: 5px 0;
 }

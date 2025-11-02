@@ -1,86 +1,118 @@
 
-* {
+body {
+  font-family: 'Poppins', Arial, sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ffcc33, #ff9966, #ff5e62, #ff9933);
+  background-size: 300% 300%;
+  animation: bgMove 10s ease infinite;
+  color: #fff;
+  text-align: center;
+  min-height: 100vh;
 }
 
 
-body {
-  background-color: #fff4e6; 
-  color: #333;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 
 .navbar {
-  width: 100%;
   display: flex;
   justify-content: flex-end;
-  padding: 20px;
-  background-color: #ffe0b2; 
-  gap: 10px;
+  align-items: center;
+  padding: 15px 30px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
 }
 
-
-.btn-orange {
-  background-color: #ff8c42;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.btn-orange:hover {
-  background-color: #ff6b00;
+.navbar span {
+  font-weight: bold;
+  color: #fff;
+  margin-right: 15px;
 }
 
 
 .main-content {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 50px 20px;
+  padding: 80px 20px;
 }
 
-
 .main-content h1 {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
-  color: black; 
+  font-size: 3rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  animation: bounce 2s infinite ease-in-out;
 }
 
 .main-content p {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
+  font-size: 1.3rem;
+  color: #fffbea;
+  margin-bottom: 40px;
 }
 
 
-.btn-red {
-  background-color: #d32f2f;
-  color: white;
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+
+button {
+  font-family: inherit;
+  font-weight: bold;
   border: none;
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  border-radius: 8px;
+  padding: 12px 30px;
+  border-radius: 25px;
   cursor: pointer;
-  margin: 10px;
-  transition: 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.3);
+}
+
+
+.btn-orange {
+  background-color: #ff8800;
+  color: #fff;
+}
+
+.btn-orange:hover {
+  background-color: #ffae42;
+}
+
+.btn-red {
+  background-color: #ff3b3b;
+  color: #fff;
 }
 
 .btn-red:hover {
-  background-color: #b71c1c;
+  background-color: #ff6666;
 }
 
+
 .center-btn {
-  display: inline-block;
+  margin: 15px;
+}
+
+
+body::before {
+  content: '';
+  background: url('/images/burger-bg.jpg') center/cover no-repeat;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  z-index: -1;
 }
